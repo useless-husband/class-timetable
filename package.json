@@ -1,0 +1,12 @@
+{
+  "name": "class-timetable",
+  "version": "1.0.0",
+  "description": "課表產生器:免安裝、可離線的網頁課表工具",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\"",
+    "serve": "python3 -m http.server 8000"
+  }
+}
