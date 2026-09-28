@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="免安裝、可離線的課表產生器:衝堂偵測、匯出圖片、列印、行事曆與分享連結。">
+  <title>課表產生器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>課表產生器</h1>
+    <div class="tablebar" id="tableBar">
+      <label class="sr-only" for="tableSelect">選擇課表</label>
+      <select id="tableSelect"></select>
+      <button type="button" id="btnNewTable">新增課表</button>
+      <button type="button" id="btnRename">重新命名</button>
+      <button type="button" id="btnDupTable">複製</button>
+      <button type="button" id="btnDelTable" class="danger">刪除</button>
+    </div>
+  </header>
+
+  <div id="banner" class="banner" hidden>
+    <p><strong>這是別人分享的課表(唯讀預覽)。</strong>想修改的話,先複製到自己的課表。</p>
+    <div class="row">
+      <button type="button" id="btnCopyMine" class="primary">複製到我的課表</button>
+      <button type="button" id="btnLeave">回到我的課表</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="toolbar" aria-label="設定與匯出">
+      <div class="row" id="editTools">
+        <label>節次
+          <select id="presetSelect">
+            <option value="university">大學常見</option>
+            <option value="high">高中</option>
+            <option value="custom" hidden>自訂</option>
+          </select>
+        </label>
+        <button type="button" id="btnPeriods">編輯節次時間</button>
+        <label>顯示
+          <select id="dayEndSelect">
+            <option value="5">週一到週五</option>
+            <option value="6">週一到週六</option>
+            <option value="7">週一到週日</option>
+          </select>
+        </label>
+        <button type="button" id="btnAdd" class="primary">新增課程</button>
+      </div>
+      <div class="row" id="exportTools">
+        <span class="label">匯出</span>
+        <button type="button" id="btnPng">圖片 (PNG)</button>
+        <button type="button" id="btnPrint">列印</button>
+        <button type="button" id="btnIcs">行事曆 (.ics)</button>
+        <button type="button" id="btnJson">JSON</button>
+        <button type="button" id="btnImport">匯入 JSON</button>
+        <button type="button" id="btnShare">分享連結</button>
+        <input type="file" id="fileInput" accept=".json,application/json" hidden>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section class="gridwrap" aria-label="課表">
+        <h2 class="print-title" id="printTitle"></h2>
+        <div id="grid" class="grid"></div>
+        <p class="hint" id="hint">點空白格子可以快速新增課程。</p>
+      </section>
+
+      <aside class="side">
+        <section aria-labelledby="hStats">
+          <h2 id="hStats">統計</h2>
+          <div id="stats"></div>
+        </section>
+        <section aria-labelledby="hConf">
+          <h2 id="hConf">衝堂</h2>
+          <div id="conflicts"></div>
+        </section>
+        <section aria-labelledby="hCourses">
+          <h2 id="hCourses">課程清單</h2>
+          <ul id="courseList" class="courselist"></ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="foot">資料只存在這台裝置的瀏覽器裡,不會上傳。 <a href="https://github.com/useless-husband/class-timetable">原始碼</a></footer>
+
+  <dialog id="dlg"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <noscript>這個網頁需要開啟 JavaScript 才能使用。</noscript>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

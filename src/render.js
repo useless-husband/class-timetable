@@ -173,12 +173,14 @@ export function drawTimetable(ctx, tt, { width = 1600, theme = 'light' } = {}) {
     if (run.conflict) {
       for (const t of wrapText(measure(nameFont), '衝堂', innerW)) lines.push({ text: t, font: nameFont, color: T.conflict });
     }
-    for (const c of run.courses) {
+    if (run.conflict) {
+      const names = run.courses.map((c) => c.name).join('、');
+      for (const t of wrapText(measure(nameFont), names, innerW)) lines.push({ text: t, font: nameFont, color: fg });
+    } else {
+      const c = run.courses[0];
       for (const t of wrapText(measure(nameFont), c.name, innerW)) lines.push({ text: t, font: nameFont, color: fg });
-      if (!run.conflict) {
-        for (const extra of [c.room, c.teacher]) {
-          if (extra) for (const t of wrapText(measure(smallFont), extra, innerW)) lines.push({ text: t, font: smallFont, color: fg });
-        }
+      for (const extra of [c.room, c.teacher]) {
+        if (extra) for (const t of wrapText(measure(smallFont), extra, innerW)) lines.push({ text: t, font: smallFont, color: fg });
       }
     }
     ctx.save();
